@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from 'next/link';
 
 /*COSAS PARA HACER
 - Mantener la base (estética) de la página defautl
@@ -18,38 +19,20 @@ export default function Home() {
           <code className={styles.code}>src/app/page.js</code>
         </p>
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
+          <a>
+            By{"  Agostina Bottarini & Joaquin Piva"}
           </a>
         </div>
       </div>
 
       <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+        <h1 style={{position: "relative", fontSize: "2vw"}}>GESTOR DE CITAS</h1>
       </div>
 
-      <div className={styles.grid} style={{display: "flex", justifyContent: "center"}}>
+      <div className={styles.grid} style={{display: "flex", justifyContent: "center", paddingLeft: "4vw"}}>
+
         <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="/quienes-somos"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
@@ -57,11 +40,11 @@ export default function Home() {
           <h2>
             Quienes somos <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
+          <p>Conoce nuestro equipo y nuestra misión para ofrecerte un servicio excepcional.</p>
         </a>
 
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="/reservas.js"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
@@ -69,11 +52,11 @@ export default function Home() {
           <h2>
             Reservas <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <p>Programa tus citas con nosotros y gestiona tu agenda con facilidad y comodidad.</p>
         </a>
 
         <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="/contacto.js"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
@@ -81,7 +64,7 @@ export default function Home() {
           <h2>
             Contacto <span>-&gt;</span>
           </h2>
-          <p>Explore starter templates for Next.js.</p>
+          <p>¡Conéctate con nosotros hoy mismo para resolver tus dudas y colaboraciones!</p>
         </a>
 
       </div>
