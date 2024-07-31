@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Link from 'next/link';
 
 /*COSAS PARA HACER
 - Mantener la base (estética) de la página defautl
@@ -9,6 +6,10 @@ import Link from 'next/link';
 - Crear el quienes somos
 - Lograr la navegacion de página en página
 */
+
+
+import styles from "./page.module.css";
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -31,43 +32,35 @@ export default function Home() {
 
       <div className={styles.grid} style={{display: "flex", justifyContent: "center", paddingLeft: "4vw"}}>
 
-        <a
-          href="/quienes-somos"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Quienes somos <span>-&gt;</span>
-          </h2>
-          <p>Conoce nuestro equipo y nuestra misión para ofrecerte un servicio excepcional.</p>
-        </a>
+        <Link href="/quienes-somos">
+          <div className={styles.card}>
+            <h2>
+                Quienes somos <span>-&gt;</span>
+            </h2>
+            <p>Conoce nuestro equipo y nuestra misión para ofrecerte un servicio excepcional.</p>
+          </div>
+        </Link>
 
-        <a
-          href="/reservas.js"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Reservas <span>-&gt;</span>
-          </h2>
-          <p>Programa tus citas con nosotros y gestiona tu agenda con facilidad y comodidad.</p>
-        </a>
+        <Link href="/reservas">
+          <div className={styles.card}>
+            <h2>
+              Reservas <span>-&gt;</span>
+            </h2>
+            <p>Programa tus citas con nosotros y gestiona tu agenda con facilidad y comodidad.</p>
+          </div>
+        </Link>
 
-        <a
-          href="/contacto.js"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Contacto <span>-&gt;</span>
-          </h2>
-          <p>¡Conéctate con nosotros hoy mismo para resolver tus dudas y colaboraciones!</p>
-        </a>
+        <Link href="/contacto">
+          <div className={styles.card}>
+            <h2>
+              Contacto <span>-&gt;</span>
+            </h2>
+            <p>¡Conéctate con nosotros hoy mismo para resolver tus dudas y colaboraciones!</p>
+          </div>
+        </Link>
 
       </div>
     </main>
   );
 }
+
