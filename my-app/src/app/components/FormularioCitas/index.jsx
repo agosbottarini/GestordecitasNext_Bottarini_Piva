@@ -1,79 +1,127 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-export default function Reservas({ setCitas }){
-    
-        const [nombreMascota, setNombreMascota] = useState('');
-        const [nombreDuenio, setNombreDuenio] = useState('');
-        const [fecha, setFecha] = useState('');
-        const [hora, setHora] = useState('');
-        const [sintomas, setSintomas] = useState('');
-    
-        const handleSubmit = (event) => {
-            event.preventDefault();
-    
-            if (nombreMascota.trim() === '' || nombreDuenio.trim() === '' || fecha === '' || hora === '' || sintomas.trim() === '') {
-                alert('Todos los campos son obligatorios');
-                return;
-            }
-            
-            const confirmar = window.confirm("¿Confirmas tu cita?");
-            if(confirmar)
-            {
-                const nuevaCita = {
-                    nombreMascota,
-                    nombreDuenio,
-                    fecha,
-                    hora,
-                    sintomas
-                };
-        
-            setCitas(prevCitas => [...prevCitas, nuevaCita]);
-    
-            }
-    
-            setNombreMascota('');
-            setNombreDuenio('');
-            setFecha('');
-            setHora('');
-            setSintomas('');
-        };
-    
-        const verificacionFecha = (e) => {
-            const fechaElegida = e.target.value;
-            const anioElegido = new Date(fechaElegida).getFullYear();
-            const anioActual = new Date().getFullYear();
-            const mesElegido = new Date(fechaElegida).getMonth();
-            const mesActual = new Date().getMonth();
-            const diaElegido = new Date(fechaElegida).getDay();
-            const diaActual = new Date().getDay();
-    
-        
-            if (anioElegido >= anioActual && mesElegido >= mesActual && diaElegido && diaActual) {
-                setFecha(fechaElegida)
-            } else {
-                alert('Por favor selecciona una fecha igual o mayor a la actual.');
-            }
-        };
-    
+const FormularioCitas = () => {
+  const [formData, setFormData] = useState({
+    nombreMascota: '',
+    nombreDueno: '',
+    fecha: '',
+    hora: '',
+    sintomas: '',
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    return(
-        <div style={{ padding: "9vw", width: "50%"}}>
-            <form style={{ display: "flex", flexDirection: "column", marginBottom: "5vw" }} onSubmit={handleSubmit}>
-                
-                <label>Nombre Mascota</label>
-                <input type="text" name="mascota" className="u-full-width" style={{marginBottom: "2vw", marginTop: "1vw", boxSizing: "2vw"}} placeholder="Nombre Mascota" value={nombreMascota} onChange={(e) => setNombreMascota(e.target.value)} />
-                <label>Nombre Dueño</label>
-                <input type="text" name="propietario" className="u-full-width" style={{marginBottom: "2vw", marginTop: "1vw"}} placeholder="Nombre dueño de la mascota" value={nombreDuenio} onChange={(e) => setNombreDuenio(e.target.value)} />
-                <label>Fecha</label>
-                <input type="date" name="fecha" className="u-full-width" style={{marginBottom: "2vw", marginTop: "1vw"}} value={fecha} onChange={verificacionFecha} />
-                <label>Hora</label>
-                <input type="time" name="hora" className="u-full-width" style={{marginBottom: "2vw", marginTop: "1vw"}} value={hora} onChange={(e) => setHora(e.target.value)} />
-                <label>Síntomas</label>
-                <textarea name="sintomas" className="u-full-width" style={{ resize: "vertical", marginBottom: "2vw" }} value={sintomas} onChange={(e) => setSintomas(e.target.value)}></textarea>
-                <button type="submit" className="u-full-width button-primary" style={{backgroundColor: "#adadad", borderRadius: "2vw", borderColor: "transparent"}}>Agregar Cita</button>
-            </form>
-        </div>
-    )
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    alert('Cita agregada');
+    setFormData({
+      nombreMascota: '',
+      nombreDueno: '',
+      fecha: '',
+      hora: '',
+      sintomas: '',
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={formStyle}>
+      <h2>Agendar una Cita:</h2>
+      <div>
+        <input
+          type="text"
+          name="nombreMascota"
+          placeholder="Nombre Mascota"
+          value={formData.nombreMascota}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          name="nombreDueno"
+          placeholder="Nombre Dueño"
+          value={formData.nombreDueno}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+      </div>
+      <div>
+        <input
+          type="date"
+          name="fecha"
+          placeholder="Fecha"
+          value={formData.fecha}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+      </div>
+      <div>
+        <input
+          type="time"
+          name="hora"
+          placeholder="Hora"
+          value={formData.hora}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+      </div>
+      <div>
+        <textarea
+          name="sintomas"
+          placeholder="Síntomas"
+          value={formData.sintomas}
+          onChange={handleChange}
+          style={textareaStyle}
+        />
+      </div>
+      <button type="submit" style={buttonStyle}>Agregar Cita</button>
+    </form>
+  );
+};
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  maxWidth: '500px',
+  margin: '0 auto',
+  backgroundColor: '#fff',
+  padding: '20px',
+  borderRadius: '10px',
+  boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+};
+
+const inputStyle = {
+  width: 'calc(100% - 20px)',
+  margin: '10px',
+  padding: '10px',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+};
+
+const textareaStyle = {
+  width: 'calc(100% - 20px)',
+  margin: '10px',
+  padding: '10px',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  minHeight: '100px',
+};
+
+const buttonStyle = {
+  margin: '10px',
+  padding: '10px 20px',
+  backgroundColor: '#000',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+};
+
+export default FormularioCitas;

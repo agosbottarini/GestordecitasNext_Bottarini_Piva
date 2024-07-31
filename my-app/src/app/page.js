@@ -1,10 +1,6 @@
 
 /*COSAS PARA HACER
-- Mantener la base (estética) de la página defautl
-- Cambiar los links del div por los correspondientes en cada caso
-- Importar en la pagina de formulario el componente del tp04
-- Crear el quienes somos
-- Lograr la navegacion de página en página
+- Chequear form cita (que no se cargue si no esan todos los campos llenos)
 */
 
 
@@ -15,10 +11,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
+
         <div>
           <a>
             By{"  Agostina Bottarini & Joaquin Piva"}
