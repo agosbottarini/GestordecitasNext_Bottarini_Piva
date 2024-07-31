@@ -10,6 +10,7 @@ const FormularioCitas = () => {
     sintomas: '',
   });
   const [citas, setCitas] = useState([]);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,26 +19,37 @@ const FormularioCitas = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCitas([...citas, formData]);
-    setFormData({
-      nombreMascota: '',
-      nombreDueno: '',
-      fecha: '',
-      hora: '',
-      sintomas: '',
-    });
+    if (validarFormulario()) {
+      setCitas([...citas, formData]);
+      setFormData({
+        nombreMascota: '',
+        nombreDueno: '',
+        fecha: '',
+        hora: '',
+        sintomas: '',
+      });
+      setError('');
+    } else {
+      setError('Por favor, complete todos los campos.');
+    }
   };
 
-  const handleDelete = (index) => {
+  const resetearForm = (index) => {
     const newCitas = [...citas];
     newCitas.splice(index, 1);
     setCitas(newCitas);
+  };
+
+  const validarFormulario = () => {
+    const { nombreMascota, nombreDueno, fecha, hora, sintomas } = formData;
+    return nombreMascota && nombreDueno && fecha && hora && sintomas;
   };
 
   return (
     <div style={containerStyle}>
       <form onSubmit={handleSubmit} style={formStyle}>
         <h2>Agendar una Cita:</h2>
+        {error && <p style={errorStyle}>{error}</p>}
         <div>
           <input
             type="text"
@@ -93,13 +105,13 @@ const FormularioCitas = () => {
       <div style={tusCitasStyle}>
         <h2>Tus Citas:</h2>
         {citas.map((cita, index) => (
-          <div key={index} style={citaStyle}>
+          <div key={index} style={citaContainStyle}>
             <p><strong>Nombre mascota:</strong> {cita.nombreMascota}</p>
             <p><strong>Nombre dueño:</strong> {cita.nombreDueno}</p>
             <p><strong>Fecha cita:</strong> {cita.fecha}</p>
             <p><strong>Hora:</strong> {cita.hora}</p>
             <p><strong>Síntomas:</strong> {cita.sintomas}</p>
-            <button onClick={() => handleDelete(index)} style={deleteButtonStyle}>Eliminar</button>
+            <button onClick={() => resetearForm(index)} style={deleteButtonStyle}>Eliminar</button>
           </div>
         ))}
       </div>
@@ -160,7 +172,7 @@ const tusCitasStyle = {
   boxShadow: '0 0 10px rgba(0,0,0,0.1)',
 };
 
-const citaStyle = {
+const citaContainStyle = {
   marginBottom: '20px',
   padding: '10px',
   backgroundColor: '#f9f9f9',
@@ -176,6 +188,11 @@ const deleteButtonStyle = {
   border: 'none',
   borderRadius: '4px',
   cursor: 'pointer',
+};
+
+const errorStyle = {
+  color: 'red',
+  margin: '10px',
 };
 
 export default FormularioCitas;
